@@ -1,9 +1,9 @@
 <?php 
-require_once "CSV.php";
-require_once "CSVSort.php";
-require_once "CSVFormatter.php";
-require_once "Stock.php";
-require_once "CSVList.php";
+require_once "../CSV/CSV.php";
+require_once "../CSV/CSVSort.php";
+require_once "../CSV/CSVFormatter.php";
+require_once "../CSV/CSVList.php";
+require_once "../Stock/Stock.php";
 
   if ($argc != 2) {
     echo "Ambiguous number of parameters!";
@@ -11,7 +11,7 @@ require_once "CSVList.php";
 }  
 
 $stock = new Stock($argv[1]);
-$csv = new CSV("orders.csv"); 
+$csv = new CSV("../orders.csv"); 
 $orders = $csv->readAll(true);
 
 CSVFormatter::standardFormat($orders["headers"]);

@@ -1,5 +1,5 @@
 <?php
-require_once "Priority.php";
+require_once "../Priority/Priority.php";
 class CSVList extends CSV implements Priority {
 
     public static function list(array $orders, object $stock) {
