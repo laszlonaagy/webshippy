@@ -1,5 +1,4 @@
 <?php
-
 class CSV 
 {
     private $file;
@@ -29,17 +28,34 @@ class CSV
         return $value;
     }   
 
-    public function readAll() {
-        $array = [];
+    public function readAll($headers = false) {
+        $array['values'] = [];
+        $array['headers'] = [];
 
+        $i = 0;
         while(($rows = fgetcsv($this->handle)) !== false) {
 
-            $columns = count($rows);
+            if($headers) {
 
-            for($i = 0; $i < $columns; $i++) {
-                $array[] = $rows[$i];
+                if($i == 0) {
+
+                    $array['headers'] = $rows;
+                } else {
+
+                    $o = [];
+                    for ($i = 0; $i < count($array['headers']); $i++) {
+
+                        $o[$array['headers'][$i]] = $rows[$i];
+                    }
+                    array_push($array['values'],$o);   
+                }   
+                
+            } else {
+     
+            $array['values'][] = $rows;
+                
             }
-
+            $i++;
         }
 
         $this->close();
